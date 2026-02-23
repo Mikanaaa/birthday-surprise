@@ -61,14 +61,17 @@ button:hover {
 
 <p id="message">March 3 Mission Ready...</p>
 
-<button onclick="startGame()">PRESS START</button>
+<button id="startBtn">PRESS START</button>
 
 <script>
 let score = 0;
-let gameStarted = false;
 
-function startGame() {
-  document.getElementById("message").innerHTML =
+document.getElementById("startBtn").addEventListener("click", function() {
+  showMessage();
+});
+
+function showMessage() {
+  document.getElementById("content").innerHTML =
   "⚡ SPEED SCANNING...<br><br>" +
   "Name Detected: Thomas<br>" +
   "Birth Date: March 3<br><br>" +
@@ -76,48 +79,47 @@ function startGame() {
   "Special Ability: Fast Coding Fingers ⚡<br>" +
   "Weakness: Missing his Filipina girlfriend 🥺<br><br>" +
   "🎉 HAPPY BIRTHDAY THOMAS! 🎉<br><br>" +
-  "You are my favorite hero, my final boss, and my forever player 2.<br><br>" +
-  "<button onclick='startMiniGame()'>🏁 START SPEED RUN 🏁</button>";
+  "<button id='gameBtn'>🏁 START SPEED RUN 🏁</button>";
+
+  setTimeout(function() {
+    document.getElementById("gameBtn").addEventListener("click", startGame);
+  }, 100);
 }
 
-function startMiniGame() {
-  gameStarted = true;
+function startGame() {
   score = 0;
-  document.getElementById("message").innerHTML =
-  "Collect 10 love rings to clear the stage! 💙<br><br>" +
+  document.getElementById("content").innerHTML =
+  "Collect 10 love rings to clear the stage 💙<br><br>" +
   "Score: <span id='score'>0</span>";
 
   spawnRing();
 }
 
 function spawnRing() {
-  if (!gameStarted) return;
-
   let ring = document.createElement("div");
   ring.innerHTML = "💍";
   ring.style.position = "absolute";
   ring.style.fontSize = "40px";
   ring.style.cursor = "pointer";
-
   ring.style.top = Math.random() * 80 + "%";
   ring.style.left = Math.random() * 80 + "%";
 
-  ring.onclick = function() {
+  ring.addEventListener("click", function() {
     score++;
     document.getElementById("score").innerText = score;
     ring.remove();
 
     if (score >= 10) {
-      gameStarted = false;
-      document.getElementById("message").innerHTML =
+      document.getElementById("content").innerHTML =
       "🏆 STAGE CLEAR THOMAS! 🏆<br><br>" +
       "You collected all the love rings 💙<br><br>" +
       "Reward Unlocked: Eternal Girlfriend<br><br>" +
+      "Distance is just a side quest.<br>" +
       "Mahal kita kahit gaano kalayo. ⚡";
     } else {
       spawnRing();
     }
-  };
+  });
 
   document.body.appendChild(ring);
 }
