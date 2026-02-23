@@ -7,122 +7,84 @@
 body {
   background: linear-gradient(to bottom, #001f4d, #003399);
   color: white;
-  font-family: 'Courier New', monospace;
+  font-family: Arial, sans-serif;
   text-align: center;
-  padding: 50px 20px;
-  min-height: 100vh;
-}
+  padding: 40px;
 }
 
 h1 {
-  font-size: 40px;
   color: gold;
-  text-shadow: 3px 3px #ff0000;
 }
 
 button {
-  padding: 15px 30px;
-  font-size: 18px;
-  background-color: red;
+  padding: 10px 20px;
+  font-size: 16px;
+  background: red;
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 10px;
-}
-
-button:hover {
-  background-color: #ff3333;
-}
-
-#message {
-  margin-top: 30px;
-  font-size: 20px;
-}
-
-.rings {
-  position: absolute;
-  top: 20px;
-  font-size: 30px;
-  animation: moveRings 5s linear infinite;
-}
-
-@keyframes moveRings {
-  from { left: -100px; }
-  to { left: 110%; }
+  margin-top: 20px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="rings">💍 💍 💍 💍 💍</div>
-
 <h1>⚡ THOMAS THE HEDGEHERO ⚡</h1>
 
-<p id="message">March 3 Mission Ready...</p>
-
-<button id="startBtn">PRESS START</button>
+<div id="gameArea">
+  <p>March 3 Mission Ready...</p>
+  <button onclick="startMessage()">PRESS START</button>
+</div>
 
 <script>
-let score = 0;
 
-document.getElementById("startBtn").addEventListener("click", function() {
-  showMessage();
-});
-
-function showMessage() {
-  document.getElementById("content").innerHTML =
-  "⚡ SPEED SCANNING...<br><br>" +
-  "Name Detected: Thomas<br>" +
-  "Birth Date: March 3<br><br>" +
-  "Power Level: Over 9000 Nerd Energy 💻<br>" +
-  "Special Ability: Fast Coding Fingers ⚡<br>" +
-  "Weakness: Missing his Cari Yancee 🥺<br><br>" +
-  "🎉 HAPPY BIRTHDAY THOMAS! 🎉<br><br>" +
-  "<button id='gameBtn'>🏁 START SPEED RUN 🏁</button>";
-
-  setTimeout(function() {
-    document.getElementById("gameBtn").addEventListener("click", startGame);
-  }, 100);
+function startMessage() {
+  document.getElementById("gameArea").innerHTML =
+    "<p>⚡ SPEED SCANNING...</p>" +
+    "<p>Power Level: Legendary Nerd 💻</p>" +
+    "<p>Weakness: Missing his Cari Yancee 🥺</p>" +
+    "<p>🎉 HAPPY BIRTHDAY THOMAS! 🎉</p>" +
+    "<button onclick='startGame()'>START SPEED RUN</button>";
 }
+
+let score = 0;
 
 function startGame() {
   score = 0;
-  document.getElementById("content").innerHTML =
-  "Collect 10 love rings to clear the stage 💙<br><br>" +
-  "Score: <span id='score'>0</span>";
+  document.getElementById("gameArea").innerHTML =
+    "<p>Collect 5 love rings 💙</p>" +
+    "<p>Score: <span id='score'>0</span></p>";
 
   spawnRing();
 }
 
 function spawnRing() {
-  let ring = document.createElement("div");
+  let ring = document.createElement("button");
   ring.innerHTML = "💍";
   ring.style.position = "absolute";
-  ring.style.fontSize = "40px";
-  ring.style.cursor = "pointer";
-  ring.style.top = Math.random() * 80 + "%";
-  ring.style.left = Math.random() * 80 + "%";
+  ring.style.top = Math.random() * 70 + "%";
+  ring.style.left = Math.random() * 70 + "%";
+  ring.style.fontSize = "25px";
 
-  ring.addEventListener("click", function() {
+  ring.onclick = function() {
     score++;
     document.getElementById("score").innerText = score;
     ring.remove();
 
-    if (score >= 10) {
-      document.getElementById("content").innerHTML =
-      "🏆 STAGE CLEAR THOMAS! 🏆<br><br>" +
-      "You collected all the love rings 💙<br><br>" +
-      "Reward Unlocked: No Calvo and Unli Kiss<br><br>" +
-      "Distance is just a side quest.<br>" +
-      "I love you, Te-amo. ⚡";
+    if (score >= 5) {
+      document.getElementById("gameArea").innerHTML =
+        "<h2>🏆 STAGE CLEAR THOMAS! 🏆</h2>" +
+        "<p>You collected all the love rings 💙</p>" +
+        "<p>I love you Te-amo</p>";
     } else {
       spawnRing();
     }
-  });
+  };
 
   document.body.appendChild(ring);
 }
+
 </script>
 
 </body>
