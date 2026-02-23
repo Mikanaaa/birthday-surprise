@@ -64,20 +64,62 @@ button:hover {
 <button onclick="startGame()">PRESS START</button>
 
 <script>
-function startGame() {
+let score = 0;
+let gameStarted = false;
 
-document.getElementById("message").innerHTML =
-"⚡ SPEED SCANNING...<br><br>" +
-"Name Detected: Thomas<br>" +
-"Birth Date: March 3<br><br>" +
-"Power Level: Over 9000 Nerd Energy 💻<br>" +
-"Special Ability: Fast Coding Fingers ⚡<br>" +
-"Weakness: Missing his Cari Yancee 🥺<br><br>" +
-"Collecting Love Rings... 💙💙💙<br><br>" +
-"🎉 HAPPY BIRTHDAY THOMAS! 🎉<br><br>" +
-"You are my favorite nerdy man, my final boss, and my forever player 2.<br><br>" +
-"Distance is just a side quest. You’re my main storyline.<br><br>" +
-"I Love You, Te Amo. 💙";
+function startGame() {
+  document.getElementById("message").innerHTML =
+  "⚡ SPEED SCANNING...<br><br>" +
+  "Name Detected: Thomas<br>" +
+  "Birth Date: March 3<br><br>" +
+  "Power Level: Over 9000 Nerd Energy 💻<br>" +
+  "Special Ability: Fast Coding Fingers ⚡<br>" +
+  "Weakness: Missing his Filipina girlfriend 🥺<br><br>" +
+  "🎉 HAPPY BIRTHDAY THOMAS! 🎉<br><br>" +
+  "You are my favorite hero, my final boss, and my forever player 2.<br><br>" +
+  "<button onclick='startMiniGame()'>🏁 START SPEED RUN 🏁</button>";
+}
+
+function startMiniGame() {
+  gameStarted = true;
+  score = 0;
+  document.getElementById("message").innerHTML =
+  "Collect 10 love rings to clear the stage! 💙<br><br>" +
+  "Score: <span id='score'>0</span>";
+
+  spawnRing();
+}
+
+function spawnRing() {
+  if (!gameStarted) return;
+
+  let ring = document.createElement("div");
+  ring.innerHTML = "💍";
+  ring.style.position = "absolute";
+  ring.style.fontSize = "40px";
+  ring.style.cursor = "pointer";
+
+  ring.style.top = Math.random() * 80 + "%";
+  ring.style.left = Math.random() * 80 + "%";
+
+  ring.onclick = function() {
+    score++;
+    document.getElementById("score").innerText = score;
+    ring.remove();
+
+    if (score >= 10) {
+      gameStarted = false;
+      document.getElementById("message").innerHTML =
+      "🏆 STAGE CLEAR THOMAS! 🏆<br><br>" +
+      "You collected all the love rings 💙<br><br>" +
+      "Reward Unlocked: Eternal Girlfriend<br><br>" +
+      "Mahal kita kahit gaano kalayo. ⚡";
+    } else {
+      spawnRing();
+    }
+  };
+
+  document.body.appendChild(ring);
 }
 </script>
 
