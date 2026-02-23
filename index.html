@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Thomas Birthday Speed Run</title>
+
+<style>
+body {
+  background: linear-gradient(to bottom, #001f4d, #003399);
+  color: white;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+  padding-top: 100px;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 40px;
+  color: gold;
+  text-shadow: 3px 3px #ff0000;
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+button:hover {
+  background-color: #ff3333;
+}
+
+#message {
+  margin-top: 30px;
+  font-size: 20px;
+}
+
+.rings {
+  position: absolute;
+  top: 20px;
+  font-size: 30px;
+  animation: moveRings 5s linear infinite;
+}
+
+@keyframes moveRings {
+  from { left: -100px; }
+  to { left: 110%; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="rings">💍 💍 💍 💍 💍</div>
+
+<h1>⚡ THOMAS THE HEDGEHERO ⚡</h1>
+
+<p id="message">March 3 Mission Ready...</p>
+
+<button onclick="startGame()">PRESS START</button>
+
+<script>
+function startGame() {
+
+document.getElementById("message").innerHTML =
+"⚡ SPEED SCANNING...<br><br>" +
+"Name Detected: Thomas<br>" +
+"Birth Date: March 3<br><br>" +
+"Power Level: Over 9000 Nerd Energy 💻<br>" +
+"Special Ability: Fast Coding Fingers ⚡<br>" +
+"Weakness: Missing his Cari Yancee 🥺<br><br>" +
+"Collecting Love Rings... 💙💙💙<br><br>" +
+"🎉 HAPPY BIRTHDAY THOMAS! 🎉<br><br>" +
+"You are my favorite nerdy man, my final boss, and my forever player 2.<br><br>" +
+"Distance is just a side quest. You’re my main storyline.<br><br>" +
+"I Love You, Te Amo. 💙";
+}
+</script>
+
+</body>
+</html>
