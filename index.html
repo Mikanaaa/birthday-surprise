@@ -1,2 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Thomas Birthday Speed Run</title>
 
+<style>
+body {
+  background: linear-gradient(to bottom, #001f4d, #003399);
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 40px;
+}
+
+h1 {
+  color: gold;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>⚡ THOMAS THE HEDGEHERO ⚡</h1>
+
+<div id="gameArea">
+  <p>March 3 Mission Ready...</p>
+  <button onclick="startMessage()">PRESS START</button>
+</div>
+
+<script>
+
+function startMessage() {
+  document.getElementById("gameArea").innerHTML =
+    "<p>⚡ SPEED SCANNING...</p>" +
+    "<p>Power Level: Legendary Nerd 💻</p>" +
+    "<p>Weakness: Missing his Filipina girlfriend 🥺</p>" +
+    "<p>🎉 HAPPY BIRTHDAY THOMAS! 🎉</p>" +
+    "<button onclick='startGame()'>START SPEED RUN</button>";
+}
+
+let score = 0;
+
+function startGame() {
+  score = 0;
+  document.getElementById("gameArea").innerHTML =
+    "<p>Collect 5 love rings 💙</p>" +
+    "<p>Score: <span id='score'>0</span></p>";
+
+  spawnRing();
+}
+
+function spawnRing() {
+  let ring = document.createElement("button");
+  ring.innerHTML = "💍";
+  ring.style.position = "absolute";
+  ring.style.top = Math.random() * 70 + "%";
+  ring.style.left = Math.random() * 70 + "%";
+  ring.style.fontSize = "25px";
+
+  ring.onclick = function() {
+    score++;
+    document.getElementById("score").innerText = score;
+    ring.remove();
+
+    if (score >= 5) {
+      document.getElementById("gameArea").innerHTML =
+        "<h2>🏆 STAGE CLEAR THOMAS! 🏆</h2>" +
+        "<p>You collected all the love rings 💙</p>" +
+        "<p>Cringe</p>";
+    } else {
+      spawnRing();
+    }
+  };
+
+  document.body.appendChild(ring);
+}
+
+</script>
+
+</body>
+</html>
 
